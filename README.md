@@ -1,36 +1,27 @@
-# 📘 Proyecto de Monitoreo de Salud
+# 📘 Projet de Surveillance de Santé  
 
-Este proyecto consta de una aplicación **backend** y una aplicación **frontend** para la gestión y visualización de datos de salud.
+Ce projet comprend une application **backend** et une application **frontend** pour la gestion et la visualisation des données de santé.  
 
-## 🚀 Instrucciones para ejecutar el proyecto
+## 🚀 Instructions pour exécuter le projet  
 
-### 🖥️ **Ejecutar el Backend**
-1. Accede a la carpeta del backend:
+### 🖥️ **Exécuter le Backend**  
+🔹 Le backend est déjà hébergé sur le serveur.  
+
+### 📱 **Exécuter le Frontend**  
+1. Accédez au dossier du frontend :  
    ```sh
-   cd backend
-   ```
-2. Inicia el servidor:
-   ```sh
-   npm run start
-   ```
-
-### 📱 **Ejecutar el Frontend**
-1. Accede a la carpeta del frontend:
-   ```sh
-   cd frontend
-   ```
-2. Inicia la aplicación con Expo:
+   cd health-monitoring-app
+   ```  
+2. Démarrez l’application avec Expo :  
    ```sh
    npx expo start
-   ```
+   ```  
 
-## 📌 Notas importantes
-- **Si necesitas instalar una dependencia** en la carpeta de front, usa **yarn** en lugar de npm:
+## 📌 Notes importantes  
+- **Si vous devez installer une dépendance** dans le dossier frontend, utilisez **yarn** au lieu de npm :  
   ```sh
-  yarn add nombre-paquete
-  ```
+  yarn install
+  ```  
 
-- **Si necesitas instalar una dependencia** en la carpeta de back, usa **npm** en lugar de npm:
-  ```sh
-  npm add nombre-paquete
-  ```
+- **Le backend étant sur le serveur, l’installation des dépendances ne nécessite pas d’intervention locale.**  
+
