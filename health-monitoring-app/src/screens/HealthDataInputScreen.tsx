@@ -32,7 +32,7 @@ const HealthDataInputScreen = ({ navigation }: any) => {
 
       const user = JSON.parse(storedUser);
       // const response = await fetch("http://127.0.0.1:5001/api/health-data", {
-      const response = await fetch("https://clinical-backend-ia.onrender.com/api/health-data", {
+      const response = await fetch("https://clinical-backend-ia-3t0k.onrender.com/api/health-data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
