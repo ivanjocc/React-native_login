@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/api/users";
+// const BASE_URL = "http://localhost:5001/api/users";
+const BASE_URL = "https://clinical-backend-ia.onrender.com/api/users";
 
 // Registro de usuarios
 export const registerUser = async (userData: any) => {
