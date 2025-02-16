@@ -34,12 +34,12 @@ const DashboardScreen = ({ navigation }: any) => {
         );
         setHealthData(data);
       } else {
-        Alert.alert("Error", "No se encontró información del usuario.");
+        Alert.alert("Erreur", "Aucune information utilisateur trouvée.");
         navigation.navigate("Login");
       }
     } catch (error) {
-      console.error("Error fetching health data:", error);
-      Alert.alert("Error", "No se pudo cargar la información.");
+      console.error("Erreur lors de la récupération des données de santé:", error);
+      Alert.alert("Erreur", "Impossible de charger les informations.");
     } finally {
       setLoading(false);
     }
@@ -70,8 +70,8 @@ const DashboardScreen = ({ navigation }: any) => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : user ? (
         <>
-          <Text style={styles.welcomeText}>Bienvenido, {user.name}!</Text>
-          <Text style={styles.emailText}>Correo: {user.email}</Text>
+          <Text style={styles.welcomeText}>Bienvenue, {user.name} !</Text>
+          <Text style={styles.emailText}>E-mail : {user.email}</Text>
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -79,12 +79,12 @@ const DashboardScreen = ({ navigation }: any) => {
               style={styles.addDataButton}
             >
               <Text style={styles.addDataButtonText}>
-                Ingresar Nuevos Datos
+                Ajouter de nouvelles données
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.sectionTitle}>Historial de Salud</Text>
+          <Text style={styles.sectionTitle}>Historique de Santé</Text>
           <FlatList
             data={healthData.slice(
               (currentPage - 1) * itemsPerPage,
@@ -94,19 +94,19 @@ const DashboardScreen = ({ navigation }: any) => {
             renderItem={({ item }: any) => (
               <View style={styles.card}>
                 <Text style={styles.cardText}>
-                  <Text style={styles.boldText}>Ritmo Cardíaco:</Text>{" "}
+                  <Text style={styles.boldText}>Fréquence Cardiaque :</Text>{" "}
                   {item.heartRate} bpm
                 </Text>
                 <Text style={styles.cardText}>
-                  <Text style={styles.boldText}>Presión Arterial:</Text>{" "}
+                  <Text style={styles.boldText}>Tension Artérielle :</Text>{" "}
                   {item.bloodPressure}
                 </Text>
                 <Text style={styles.cardText}>
-                  <Text style={styles.boldText}>Nivel de Oxígeno:</Text>{" "}
+                  <Text style={styles.boldText}>Niveau d'Oxygène :</Text>{" "}
                   {item.oxygenLevel}%
                 </Text>
                 <Text style={styles.cardText}>
-                  <Text style={styles.boldText}>Fecha:</Text>{" "}
+                  <Text style={styles.boldText}>Date :</Text>{" "}
                   {new Date(item.createdAt).toLocaleString()}
                 </Text>
               </View>
@@ -121,11 +121,11 @@ const DashboardScreen = ({ navigation }: any) => {
                     currentPage === 1 && styles.disabledButton,
                   ]}
                 >
-                  <Text style={styles.pageButtonText}>Anterior</Text>
+                  <Text style={styles.pageButtonText}>Précédent</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.pageIndicator}>
-                  Página {currentPage} de{" "}
+                  Page {currentPage} sur{" "}
                   {Math.ceil(healthData.length / itemsPerPage)}
                 </Text>
 
@@ -141,7 +141,7 @@ const DashboardScreen = ({ navigation }: any) => {
                       styles.disabledButton,
                   ]}
                 >
-                  <Text style={styles.pageButtonText}>Siguiente</Text>
+                  <Text style={styles.pageButtonText}>Suivant</Text>
                 </TouchableOpacity>
               </View>
             }
@@ -149,7 +149,7 @@ const DashboardScreen = ({ navigation }: any) => {
         </>
       ) : (
         <Text style={styles.noDataText}>
-          Cargando información del usuario...
+          Chargement des informations utilisateur...
         </Text>
       )}
     </View>

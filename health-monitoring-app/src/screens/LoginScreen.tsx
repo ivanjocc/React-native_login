@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  Alert, 
+  StyleSheet, 
+  ActivityIndicator 
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginUser } from '../api/auth';
 
@@ -10,7 +18,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Todos los campos son obligatorios');
+      Alert.alert("Erreur", "Tous les champs sont obligatoires");
       return;
     }
 
@@ -19,10 +27,10 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
     try {
       const response = await loginUser({ email, password });
       await AsyncStorage.setItem('user', JSON.stringify(response.user));
-      Alert.alert('Éxito', `Bienvenido ${response.user.name}`);
+      Alert.alert("Succès", `Bienvenue, ${response.user.name} !`);
       navigation.navigate('Dashboard');
     } catch (error: any) {
-      Alert.alert('Error', error.message || 'Error al iniciar sesión');
+      Alert.alert("Erreur", error.message || "Échec de la connexion");
     } finally {
       setLoading(false);
     }
@@ -30,30 +38,96 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
+      <Text style={styles.title}>Connexion</Text>
+
       <TextInput
-        placeholder="Correo electrónico"
+        placeholder="Adresse e-mail"
         value={email}
         onChangeText={setEmail}
         style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        placeholderTextColor="#999"
       />
+      
       <TextInput
-        placeholder="Contraseña"
+        placeholder="Mot de passe"
         value={password}
         onChangeText={setPassword}
         style={styles.input}
         secureTextEntry
+        placeholderTextColor="#999"
       />
-      <Button
-        title={loading ? 'Iniciando...' : 'Iniciar Sesión'}
-        onPress={handleLogin}
-      />
+
+      <TouchableOpacity 
+        style={[styles.button, loading && styles.buttonDisabled]} 
+        onPress={handleLogin} 
+        disabled={loading}
+      >
+        {loading ? <ActivityIndicator color="#FFF" /> : <Text style={styles.buttonText}>Se connecter</Text>}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.linkText}>Pas encore de compte ? Inscrivez-vous</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 15, borderRadius: 5 },
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    backgroundColor: '#F5F5F5',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  input: {
+    backgroundColor: '#FFF',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    fontSize: 16,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  button: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  buttonDisabled: {
+    backgroundColor: '#A0A0A0',
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  linkText: {
+    marginTop: 20,
+    color: '#007BFF',
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: '600',
+  },
 });

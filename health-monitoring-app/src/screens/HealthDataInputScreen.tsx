@@ -18,7 +18,7 @@ const HealthDataInputScreen = ({ navigation }: any) => {
 
   const handleSaveHealthData = async () => {
     if (!heartRate || !bloodPressure || !oxygenLevel) {
-      Alert.alert("Error", "Todos los campos son obligatorios.");
+      Alert.alert("Erreur", "Tous les champs sont obligatoires.");
       return;
     }
 
@@ -26,7 +26,7 @@ const HealthDataInputScreen = ({ navigation }: any) => {
       setLoading(true);
       const storedUser = await AsyncStorage.getItem("user");
       if (!storedUser) {
-        Alert.alert("Error", "No se encontró información del usuario.");
+        Alert.alert("Erreur", "Aucune information utilisateur trouvée.");
         return;
       }
 
@@ -47,17 +47,17 @@ const HealthDataInputScreen = ({ navigation }: any) => {
       });
 
       if (!response.ok) {
-        throw new Error("No se pudo guardar la información.");
+        throw new Error("Impossible d'enregistrer les informations.");
       }
 
       setHeartRate("");
       setBloodPressure("");
       setOxygenLevel("");
-      Alert.alert("Éxito", "Datos guardados correctamente.");
-      navigation.goBack(); // Volver a la pantalla anterior
+      Alert.alert("Succès", "Données enregistrées avec succès.");
+      navigation.goBack();
     } catch (error) {
-      console.error("Error al guardar datos:", error);
-      Alert.alert("Error", "No se pudo guardar la información.");
+      console.error("Erreur lors de l'enregistrement des données:", error);
+      Alert.alert("Erreur", "Impossible d'enregistrer les informations.");
     } finally {
       setLoading(false);
     }
@@ -69,14 +69,14 @@ const HealthDataInputScreen = ({ navigation }: any) => {
         onPress={() => navigation.navigate("HealthChart")}
         style={styles.chartButton}
       >
-        <Text style={styles.chartButtonText}>Ver Gráficos</Text>
+        <Text style={styles.chartButtonText}>Voir les Graphiques</Text>
       </TouchableOpacity>
 
-      <Text style={styles.headerText}>Ingresar Datos de Salud</Text>
+      <Text style={styles.headerText}>Entrer les Données de Santé</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Ritmo Cardíaco (bpm)"
+        placeholder="Fréquence Cardiaque (bpm)"
         keyboardType="numeric"
         value={heartRate}
         onChangeText={setHeartRate}
@@ -84,14 +84,14 @@ const HealthDataInputScreen = ({ navigation }: any) => {
 
       <TextInput
         style={styles.input}
-        placeholder="Presión Arterial (ej: 120/80)"
+        placeholder="Tension Artérielle (ex: 120/80)"
         value={bloodPressure}
         onChangeText={setBloodPressure}
       />
 
       <TextInput
         style={styles.input}
-        placeholder="Nivel de Oxígeno (%)"
+        placeholder="Niveau d'Oxygène (%)"
         keyboardType="numeric"
         value={oxygenLevel}
         onChangeText={setOxygenLevel}
@@ -105,7 +105,7 @@ const HealthDataInputScreen = ({ navigation }: any) => {
         {loading ? (
           <ActivityIndicator size="small" color="#fff" />
         ) : (
-          <Text style={styles.buttonText}>Guardar Datos</Text>
+          <Text style={styles.buttonText}>Enregistrer les Données</Text>
         )}
       </TouchableOpacity>
     </View>

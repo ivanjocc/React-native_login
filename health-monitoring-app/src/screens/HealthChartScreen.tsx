@@ -40,7 +40,7 @@ const HealthChartScreen = ({ navigation }: any) => {
         navigation.navigate("Login");
       }
     } catch (error) {
-      console.error("Error fetching health data:", error);
+      console.error("Erreur lors de la récupération des données de santé :", error);
     } finally {
       setLoading(false);
     }
@@ -50,13 +50,12 @@ const HealthChartScreen = ({ navigation }: any) => {
     navigation.setOptions({
       headerRight: () => (
         <Text onPress={() => navigation.navigate("Dashboard")} style={styles.headerButton}>
-          Volver al Dashboard
+          Retour au Tableau de Bord
         </Text>
       ),
     });
   }, [navigation]);
 
-  // Extraer datos 📊
   const heartRates = healthData.map((item: any) => item.heartRate);
   const oxygenLevels = healthData.map((item: any) => item.oxygenLevel);
   const bloodPressures = healthData.map((item: any) => parseInt(item.bloodPressure.split("/")[0]));
@@ -68,20 +67,20 @@ const HealthChartScreen = ({ navigation }: any) => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : user ? (
         <>
-          <Text style={styles.title}>Gráficos de Salud</Text>
+          <Text style={styles.title}>Graphiques de Santé</Text>
 
           <View style={styles.chartsContainer}>
-            {/* 📊 Ritmo Cardíaco */}
+            {/* 📊 Fréquence Cardiaque */}
             {heartRates.length > 0 && (
               <View style={styles.chartBox}>
-                <Text style={styles.chartTitle}>Ritmo Cardíaco</Text>
+                <Text style={styles.chartTitle}>Fréquence Cardiaque</Text>
                 <LineChart
                   data={{
                     labels: labels.slice(-5),
                     datasets: [{ data: heartRates.slice(-5) }],
                   }}
                   width={screenWidth * 0.85}
-                  height={screenHeight * 0.20} // Reducido
+                  height={screenHeight * 0.20} // Réduit
                   yAxisSuffix=" bpm"
                   chartConfig={chartConfig}
                   bezier
@@ -90,17 +89,17 @@ const HealthChartScreen = ({ navigation }: any) => {
               </View>
             )}
 
-            {/* 📊 Nivel de Oxígeno */}
+            {/* 📊 Niveau d'Oxygène */}
             {oxygenLevels.length > 0 && (
               <View style={styles.chartBox}>
-                <Text style={styles.chartTitle}>Nivel de Oxígeno</Text>
+                <Text style={styles.chartTitle}>Niveau d'Oxygène</Text>
                 <LineChart
                   data={{
                     labels: labels.slice(-5),
                     datasets: [{ data: oxygenLevels.slice(-5) }],
                   }}
                   width={screenWidth * 0.85}
-                  height={screenHeight * 0.20} // Reducido
+                  height={screenHeight * 0.20} // Réduit
                   yAxisSuffix="%"
                   chartConfig={chartConfig}
                   bezier
@@ -109,17 +108,17 @@ const HealthChartScreen = ({ navigation }: any) => {
               </View>
             )}
 
-            {/* 📊 Presión Arterial Sistólica */}
+            {/* 📊 Pression Artérielle Systolique */}
             {bloodPressures.length > 0 && (
               <View style={styles.chartBox}>
-                <Text style={styles.chartTitle}>Presión Arterial (Sistólica)</Text>
+                <Text style={styles.chartTitle}>Pression Artérielle (Systolique)</Text>
                 <LineChart
                   data={{
                     labels: labels.slice(-5),
                     datasets: [{ data: bloodPressures.slice(-5) }],
                   }}
                   width={screenWidth * 0.85}
-                  height={screenHeight * 0.20} // Reducido
+                  height={screenHeight * 0.20} // Réduit
                   yAxisSuffix=" mmHg"
                   chartConfig={chartConfig}
                   bezier
@@ -130,13 +129,12 @@ const HealthChartScreen = ({ navigation }: any) => {
           </View>
         </>
       ) : (
-        <Text style={styles.noDataText}>Cargando información del usuario...</Text>
+        <Text style={styles.noDataText}>Chargement des informations utilisateur...</Text>
       )}
     </View>
   );
 };
 
-// 📊 Configuración general de los gráficos
 const chartConfig = {
   backgroundGradientFrom: "#fff",
   backgroundGradientTo: "#fff",
@@ -149,7 +147,7 @@ const chartConfig = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center", // Centrar contenido
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f9f9f9",
     padding: 16,
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     width: screenWidth * 0.90,
     alignItems: "center",
-    elevation: 3, // Sombra en Android
+    elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
