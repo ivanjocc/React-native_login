@@ -9,7 +9,7 @@ export const registerUser = async (userData: any) => {
     const response = await axios.post(BASE_URL, userData);
     return response.data;
   } catch (error: any) {
-    throw error.response?.data || "Error during registration";
+    throw error.response?.data || "Erreur lors de l'inscription";
   }
 };
 
@@ -19,6 +19,6 @@ export const loginUser = async (loginData: any) => {
     const response = await axios.post(`${BASE_URL}/login`, loginData);
     return response.data;
   } catch (error: any) {
-    throw error.response?.data || "Error during login";
+    throw error.response?.data || "Erreur lors de la connexion";
   }
 };

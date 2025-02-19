@@ -11,46 +11,46 @@ export const api = axios.create({
   },
 });
 
-// Registrar un nuevo usuario
-export const registerUser = async (userData) => {
+// Enregistrer un nouvel utilisateur
+export const registerUser = async (donneesUtilisateur) => {
   try {
-    const response = await api.post("/users", userData);
+    const response = await api.post("/users", donneesUtilisateur);
     return response.data;
   } catch (error) {
-    console.error("Error registering user:", error.response?.data || error.message);
+    console.error("Erreur lors de l'inscription de l'utilisateur :", error.response?.data || error.message);
     throw error;
   }
 };
 
-// Guardar datos de salud
-export const saveHealthData = async (healthData) => {
+// Enregistrer des données de santé
+export const saveHealthData = async (donneesSante) => {
   try {
-    const response = await api.post("/health-data", healthData);
+    const response = await api.post("/health-data", donneesSante);
     return response.data;
   } catch (error) {
-    console.error("Error saving health data:", error.response?.data || error.message);
+    console.error("Erreur lors de l'enregistrement des données de santé :", error.response?.data || error.message);
     throw error;
   }
 };
 
-// Obtener todos los usuarios
+// Récupérer tous les utilisateurs
 export const fetchUsers = async () => {
   try {
     const response = await api.get("/users");
     return response.data;
   } catch (error) {
-    console.error("Error fetching users:", error.response?.data || error.message);
+    console.error("Erreur lors de la récupération des utilisateurs :", error.response?.data || error.message);
     throw error;
   }
 };
 
-// Obtener datos de salud por usuario
-export const fetchHealthDataByUser = async (userId) => {
+// Récupérer les données de santé par utilisateur
+export const fetchHealthDataByUser = async (idUtilisateur) => {
   try {
-    const response = await api.get(`/health-data/${userId}`);
+    const response = await api.get(`/health-data/${idUtilisateur}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching health data:", error.response?.data || error.message);
+    console.error("Erreur lors de la récupération des données de santé :", error.response?.data || error.message);
     throw error;
   }
 };

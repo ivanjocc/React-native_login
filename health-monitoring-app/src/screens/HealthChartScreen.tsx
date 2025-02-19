@@ -118,7 +118,7 @@ const HealthChartScreen = ({ navigation }: any) => {
                     datasets: [{ data: bloodPressures.slice(-5) }],
                   }}
                   width={screenWidth * 0.85}
-                  height={screenHeight * 0.20} // Réduit
+                  height={screenHeight * 0.20}
                   yAxisSuffix=" mmHg"
                   chartConfig={chartConfig}
                   bezier

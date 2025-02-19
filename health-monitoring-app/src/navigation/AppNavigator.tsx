@@ -18,21 +18,21 @@ export default function AppNavigator({ navigation }: any) {
       await AsyncStorage.removeItem("user");
       navigation.replace("Login");
     } catch (error) {
-      Alert.alert("Error", "No se pudo cerrar sesión.");
+      Alert.alert("Erreur", "Impossible de se déconnecter.");
     }
   };
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Navigator initialRouteName="Accueil">
+        <Stack.Screen name="Accueil" component={HomeScreen} />
+        <Stack.Screen name="Connexion" component={LoginScreen} />
+        <Stack.Screen name="Inscription" component={RegisterScreen} />
         <Stack.Screen
-          name="Dashboard"
+          name="Tableau de bord"
           component={DashboardScreen}
           options={({ navigation }) => ({
-            title: "Panel de Control",
+            title: "Tableau de bord",
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => handleLogout(navigation)}
@@ -44,16 +44,15 @@ export default function AppNavigator({ navigation }: any) {
                 }}
               >
                 <Text style={{ color: "#fff", fontSize: 14, fontWeight: "bold" }}>
-                  Cerrar Sesión
+                  Déconnexion
                 </Text>
               </TouchableOpacity>
             ),
           })}
         />
-        <Stack.Screen name="HealthDataInput" component={HealthDataInputScreen} />
-        <Stack.Screen name="HealthChart" component={HealthChartScreen} />
+        <Stack.Screen name="Saisie des données de santé" component={HealthDataInputScreen} />
+        <Stack.Screen name="Graphique de santé" component={HealthChartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-// .
