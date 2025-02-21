@@ -24,15 +24,15 @@ export default function AppNavigator({ navigation }: any) {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Accueil">
-        <Stack.Screen name="Accueil" component={HomeScreen} />
-        <Stack.Screen name="Connexion" component={LoginScreen} />
-        <Stack.Screen name="Inscription" component={RegisterScreen} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen
-          name="Tableau de bord"
+          name="Dashboard"
           component={DashboardScreen}
           options={({ navigation }) => ({
-            title: "Tableau de bord",
+            title: "Dashboard",
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => handleLogout(navigation)}
@@ -44,15 +44,16 @@ export default function AppNavigator({ navigation }: any) {
                 }}
               >
                 <Text style={{ color: "#fff", fontSize: 14, fontWeight: "bold" }}>
-                  Déconnexion
+                Déconnexion
                 </Text>
               </TouchableOpacity>
             ),
           })}
         />
-        <Stack.Screen name="Saisie des données de santé" component={HealthDataInputScreen} />
-        <Stack.Screen name="Graphique de santé" component={HealthChartScreen} />
+        <Stack.Screen name="HealthDataInput" component={HealthDataInputScreen} />
+        <Stack.Screen name="HealthChart" component={HealthChartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+// .
